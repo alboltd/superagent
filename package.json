@@ -110,6 +110,7 @@
   "name": "superagent",
   "overrides": {
     "adm-zip": "0.6.1",
+    "compression": "1.8.2",
     "handlebars": "4.7.10",
     "http-proxy": "1.18.1",
     "lodash": "4.18.1",
