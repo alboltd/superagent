@@ -112,6 +112,7 @@
     "adm-zip": "0.6.1",
     "compression": "1.8.2",
     "connect": {
+      "cookie-signature": "1.2.2",
       "send": "0.11.1"
     },
     "decode-uri-component": "0.5.1",
@@ -124,6 +125,7 @@
     },
     "tunnel-agent": "0.6.0",
     "zuul": {
+      "cookie-signature": "1.2.2",
       "send": "0.11.1",
       "shell-quote": "1.12.0"
     }
