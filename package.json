@@ -128,5 +128,10 @@
     "test-http2": "npm run build && npm run lint && make test-node-http2",
     "prepare": "husky"
   },
-  "unpkg": "dist/superagent.min.js"
+  "unpkg": "dist/superagent.min.js",
+  "overrides": {
+    "zuul": {
+      "shell-quote": "1.12.0"
+    }
+  }
 }
