@@ -1,6 +1,5 @@
 OLDNODETESTS ?= lib/node/test/*.js lib/node/test/node/*.js
 NODETESTS ?= test/*.js test/node/*.js
-BROWSERTESTS ?= test/*.js test/client/*.js
 REPORTER = spec
 
 ifeq ("$(OLD_NODE_TEST)", "1")
@@ -45,10 +44,10 @@ test-cov: lib-cov
 	SUPERAGENT_COV=1 $(MAKE) test REPORTER=html-cov > coverage.html
 
 test-browser:
-	SAUCE_APPIUM_VERSION=1.7 ./node_modules/.bin/zuul -- $(BROWSERTESTS)
+	npm run test:browser
 
 test-browser-local:
-	./node_modules/.bin/zuul --no-coverage --local 4000 -- $(BROWSERTESTS)
+	npm run test:browser
 
 lib-cov:
 	jscoverage lib lib-cov
@@ -74,4 +73,4 @@ test-docs: docs/head.html docs/tail.html
 clean:
 	rm -fr components
 
-.PHONY: copy test-cov test docs test-docs clean test-browser-local
+.PHONY: copy test-cov test docs test-docs clean test-browser test-browser-local

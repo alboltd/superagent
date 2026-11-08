@@ -622,3 +622,4 @@ app.get('/error/redirect-error:id', (request, res) => {
 
 const server = http.createServer(app);
 server.listen(process.env.ZUUL_PORT);
+module.exports = { app, server };

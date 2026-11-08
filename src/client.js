@@ -105,9 +105,11 @@ function serialize(object) {
  */
 
 function pushEncodedKeyValuePair(pairs, key, value) {
+  // Preserve the historic `$` key behavior while escaping query delimiters.
+  const encodedKey = encodeURIComponent(key).replace(/%24/g, '$');
   if (value === undefined) return;
   if (value === null) {
-    pairs.push(encodeURI(key));
+    pairs.push(encodedKey);
     return;
   }
 
@@ -121,7 +123,7 @@ function pushEncodedKeyValuePair(pairs, key, value) {
         pushEncodedKeyValuePair(pairs, `${key}[${subkey}]`, value[subkey]);
     }
   } else {
-    pairs.push(encodeURI(key) + '=' + encodeURIComponent(value));
+    pairs.push(encodedKey + '=' + encodeURIComponent(value));
   }
 }
 

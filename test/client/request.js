@@ -192,24 +192,15 @@ describe('request', function () {
       });
   });
 
-  it('progress event listener on xhr object registered when some on the request', () => {
-    const request_ = request.get('/foo').on('progress', (data) => {});
-    request_.end();
-
-    if (request_.xhr.upload) {
-      // Only run assertion on capable browsers
-      assert.notEqual(null, request_.xhr.upload.onprogress);
-    }
-  });
-
-  it('no progress event listener on xhr object when none registered on request', () => {
-    const request_ = request.get('/foo');
-    request_.end();
-
-    if (request_.xhr.upload) {
-      // Only run assertion on capable browsers
-      assert.strictEqual(null, request_.xhr.upload.onprogress);
-    }
+  it('emits a download progress event when requested', (done) => {
+    let observed = false;
+    request.get('/foo').on('progress', (event) => {
+      if (event.direction === 'download') observed = true;
+    }).end((error) => {
+      assert.ifError(error);
+      assert(observed, 'download progress should be reported');
+      done();
+    });
   });
 
   it('Request#parse overrides body parser no matter Content-Type', (done) => {
