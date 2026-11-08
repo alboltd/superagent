@@ -120,6 +120,9 @@
     },
     "uglifyify": {
       "terser": "4.8.1"
+    },
+    "istanbul-lib-processinfo": {
+      "uuid": "11.1.1"
     }
   },
   "repository": {
