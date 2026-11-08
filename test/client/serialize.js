@@ -38,8 +38,7 @@ describe('request.serializeObject()', () => {
     serialize({ '&name&': 'tj' }, '%26name%26=tj');
     serialize({ hello: '`test`' }, 'hello=%60test%60');
     serialize({ $hello: 'test' }, '$hello=test');
-    // eslint-disable-next-line no-dupe-keys
-    serialize({ foo: 'foo', foo: 'bar' }, 'foo=foo&foo=bar');
+    serialize({ foo: ['foo', 'bar'] }, 'foo=foo&foo=bar');
   });
 });
 

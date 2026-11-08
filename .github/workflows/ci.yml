@@ -1,10 +1,6 @@
 name: CI
 on: [push, pull_request]
 
-env:
-  SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
-  SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
-
 permissions:
   contents: read #  to fetch code (actions/checkout)
 
@@ -47,6 +43,15 @@ jobs:
             npm run lint
             make test
           fi
+      - name: Install browser engines for browser tests
+        if: matrix.node-version == '22.x'
+        run: npx playwright install --with-deps chromium firefox webkit
+      - name: Test in browsers
+        if: matrix.node-version == '22.x'
+        run: |
+          for engine in chromium firefox webkit; do
+            BROWSER_ENGINE="$engine" npm run test:browser
+          done
       - name: Coverage On Node ${{ matrix.node-version }}
         run: npm run coverage
       - name: Upload coverage to Codecov
